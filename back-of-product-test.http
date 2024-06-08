@@ -1,0 +1,6 @@
+@back_of_product_test_HostAddress = http://localhost:5126
+
+GET {{back_of_product_test_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

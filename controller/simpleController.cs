@@ -33,7 +33,9 @@ namespace simpleWebApp.controller
             {
                 return BadRequest("Username or password is empty");
             }
+            // Find the user with the provided username or email
             var user = _context.Users.SingleOrDefault(u => (u.Username == request.Username || u.Email == request.Username));
+            // Return a 400 Bad Request response if the user is not found or the password is incorrect
             if (user == null || !PasswordHasher.ValidatePassword(request.Password, user.Password))
             {
                 return BadRequest("Username or password is incorrect");

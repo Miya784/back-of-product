@@ -37,3 +37,13 @@
 /Users/burhanjehloh/Documents/GitHub/back-of-product-test/obj/Debug/net8.0/back-of-product-test.pdb
 /Users/burhanjehloh/Documents/GitHub/back-of-product-test/obj/Debug/net8.0/back-of-product-test.genruntimeconfig.cache
 /Users/burhanjehloh/Documents/GitHub/back-of-product-test/obj/Debug/net8.0/ref/back-of-product-test.dll
+/Users/burhanjehloh/Documents/GitHub/back-of-product-test/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/burhanjehloh/Documents/GitHub/back-of-product-test/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/burhanjehloh/Documents/GitHub/back-of-product-test/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/Users/burhanjehloh/Documents/GitHub/back-of-product-test/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/burhanjehloh/Documents/GitHub/back-of-product-test/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/burhanjehloh/Documents/GitHub/back-of-product-test/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/Users/burhanjehloh/Documents/GitHub/back-of-product-test/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/Users/burhanjehloh/Documents/GitHub/back-of-product-test/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/burhanjehloh/Documents/GitHub/back-of-product-test/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/Users/burhanjehloh/Documents/GitHub/back-of-product-test/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll

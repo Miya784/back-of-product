@@ -1,7 +1,4 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using simpleWebApp.Models;
 using PosgresDb.Data;
 

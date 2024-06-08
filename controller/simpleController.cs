@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using simpleWebApp.Models;
+using Microsoft.EntityFrameworkCore;
 using PosgresDb.Data;
+using simpleWebApp.Models;
 
 namespace simpleWebApp.controller
 {
@@ -19,20 +20,30 @@ namespace simpleWebApp.controller
     [Route("api/[controller]")]
     public class loginController : Controller
     {
+        private readonly AppDbContext _context;
+        public loginController(AppDbContext context)
+        {
+            _context = context;
+        }
+
         [HttpPost]
-        public IActionResult post([FromBody] LoginRequest request)
+        public IActionResult Post([FromBody] LoginRequest request)
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password))
             {
                 return BadRequest("Username or password is empty");
             }
-            var response = new
+            var user = _context.Users.SingleOrDefault(u => (u.Username == request.Username || u.Email == request.Username));
+            if (user == null || !PasswordHasher.ValidatePassword(request.Password, user.Password))
             {
-                Massage = "Welcome",
-                Username = request.Username,
-                Password = request.Password
-            };
-            return Ok(response);
+                return BadRequest("Username or password is incorrect");
+            }
+
+            return Ok(new
+            {
+                Message = "Welcome",
+                Username = user.Username
+            });
         }
     }
 
@@ -55,11 +66,12 @@ namespace simpleWebApp.controller
                 return BadRequest("Username, password, or email is empty");
             }
 
+            var hashedPassword = PasswordHasher.HashPassword(request.Password);
             // Create a new User object with data from the request
             var newUser = new User
             {
                 Username = request.Username,
-                Password = request.Password,
+                Password = hashedPassword,
                 Email = request.Email
             };
 

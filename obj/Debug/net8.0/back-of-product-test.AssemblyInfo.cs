@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("back-of-product-test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69b8beac812c291088d5a6c1acc5882c848f51c3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b0f11887a1b8e39802aefc10c98026e207430bf")]
 [assembly: System.Reflection.AssemblyProductAttribute("back-of-product-test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("back-of-product-test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

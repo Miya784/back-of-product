@@ -10,7 +10,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 
-builder.Services.AddEntityFrameworkNpgsql().AddDbContext<AppDbContext>(opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("simpleConnection")));
+builder.Services.AddEntityFrameworkNpgsql()
+    .AddDbContext<AppDbContext>(opt => 
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("simpleConnection")));
 
 
 var app = builder.Build();

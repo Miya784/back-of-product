@@ -13,7 +13,8 @@ namespace PosgresDb.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>(entity => {
+            modelBuilder.Entity<User>(entity =>
+            {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Username).IsRequired();
                 entity.Property(e => e.Password).IsRequired();
@@ -21,19 +22,21 @@ namespace PosgresDb.Data
             });
 
             modelBuilder.Entity<User>().HasData(
-                new User 
-                { 
-                    Id = 1, Username = "admin",
+                new User
+                {
+                    Id = 1,
+                    Username = "admin",
                     Password = "admin",
-                     Email = "admin@than.com"
+                    Email = "admin@than.com"
                 });
 
-            modelBuilder.Entity<Product>(entity => {
+            modelBuilder.Entity<Product>(entity =>
+            {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Name).IsRequired();
                 entity.Property(e => e.Description).IsRequired();
                 entity.Property(e => e.Price).IsRequired();
-                entity.HasOne(e => e.User).WithMany().HasForeignKey(e => e.Id);
+                entity.HasOne(e => e.User).WithMany(u => u.Products).HasForeignKey(e => e.UserId);
             });
 
             modelBuilder.Entity<Product>().HasData(

@@ -33,18 +33,17 @@ namespace simpleWebApp.controller
             {
                 return BadRequest("Username or password is empty");
             }
-            // Find the user with the provided username or email
             var user = _context.Users.SingleOrDefault(u => (u.Username == request.Username || u.Email == request.Username));
-            // Return a 400 Bad Request response if the user is not found or the password is incorrect
             if (user == null || !PasswordHasher.ValidatePassword(request.Password, user.Password))
             {
                 return BadRequest("Username or password is incorrect");
             }
-
+            var UserID = user.Id;
             return Ok(new
             {
                 Message = "Welcome",
-                Username = user.Username
+                UserID = UserID,
+                Username = user.Username,
             });
         }
     }
@@ -69,7 +68,6 @@ namespace simpleWebApp.controller
             }
 
             var hashedPassword = PasswordHasher.HashPassword(request.Password);
-            // Create a new User object with data from the request
             var newUser = new User
             {
                 Username = request.Username,
@@ -79,11 +77,8 @@ namespace simpleWebApp.controller
 
             try
             {
-                // Add the new user to the database
                 _context.Users.Add(newUser);
                 _context.SaveChanges();
-
-                // Return a success response with the newly created user data
                 return Ok(new
                 {
                     Message = "User created successfully",
@@ -92,7 +87,54 @@ namespace simpleWebApp.controller
             }
             catch (Exception ex)
             {
-                // Return a 500 Internal Server Error if an exception occurs
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+    }
+
+    [ApiController]
+    [Route("api/[controller]")]
+    public class addProductController : ControllerBase
+    {
+        private readonly AppDbContext _context;
+
+        public addProductController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] Product request)
+        {
+            if (string.IsNullOrEmpty(request.Name) || request.Price == 0)
+            {
+                return BadRequest("Name or price is empty");
+            }
+            var user = _context.Users.SingleOrDefault(u => u.Id == request.UserId);
+            if (user == null)
+            {
+                return BadRequest("User not found");
+            }
+            var newProduct = new Product
+            {
+                UserId = request.UserId,
+                Name = request.Name,
+                Price = request.Price,
+                Description = request.Description
+            };
+
+            try
+            {
+                _context.Products.Add(newProduct);
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    Message = "Product added successfully",
+                    Product = newProduct.Name
+                });
+            }
+            catch (Exception ex)
+            {
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }

@@ -3,3 +3,5 @@ obj/
 Migrations/
 
 bin/
+
+.DS_Store

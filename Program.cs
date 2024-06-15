@@ -8,6 +8,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "_myAllowSpecificOrigins",
+                      policy  =>
+                      {
+                          policy.WithOrigins("http://localhost:3000" );
+                      });
+});
+
+
 
 builder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<AppDbContext>(opt => 
@@ -15,6 +25,7 @@ builder.Services.AddEntityFrameworkNpgsql()
 
 
 var app = builder.Build();
+app.UseCors("_myAllowSpecificOrigins");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

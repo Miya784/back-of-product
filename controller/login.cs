@@ -3,6 +3,12 @@ using Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using PosgresDb.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using customer.Models;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+
+
 
 
 namespace login.controller
@@ -43,9 +49,11 @@ namespace login.controller
     public class loginUserController : Controller
     {
         private readonly AppDbContext _context;
-        public loginUserController(AppDbContext context)
+        private IConfiguration _config;
+        public loginUserController(AppDbContext context, IConfiguration config)
         {
             _context = context;
+            _config = config;
         }
 
         [HttpPost]

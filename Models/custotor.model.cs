@@ -30,5 +30,12 @@ namespace customer.Models
         public string Description { get; set; } = string.Empty;
         [Required]
         public decimal Price { get; set; }
+        public string DateTime { get; set;} = string.Empty;
+    }
+    public class BuyRequest
+    {
+        public int UserId { get; set; }
+        public string ProductName { get; set; } = string.Empty;
+        public decimal Price { get; set; }
     }
 }

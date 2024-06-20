@@ -52,4 +52,53 @@ namespace registerAdmin.controller
             }
         }
     }
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ProductAdminController : ControllerBase
+    {
+        private readonly AppDbContext _context;
+
+        public ProductAdminController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] ProductAdmin request)
+        {
+            if (request.UserId == 0 || string.IsNullOrEmpty(request.Name) || string.IsNullOrEmpty(request.Description) || request.Price == 0)
+            {
+                return BadRequest(new { message = "Name, description or price is empty" });
+            }
+
+            var productAdmin = _context.ProductsAdmin.SingleOrDefault(u => u.Name == request.Name);
+            if (productAdmin != null)
+            {
+                return BadRequest(new { message = "Product already exists" });
+            }
+            var newProductAdmin = new ProductAdmin
+            {
+                UserId = request.UserId,
+                Name = request.Name,
+                Description = request.Description,
+                Price = request.Price,
+                Stock = request.Stock
+            };
+            try
+            {
+                _context.ProductsAdmin.Add(newProductAdmin);
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    Message = "Product created successfully",
+                    Product = newProductAdmin
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+    }
+
 }

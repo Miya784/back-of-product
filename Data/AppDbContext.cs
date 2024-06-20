@@ -85,7 +85,8 @@ namespace PosgresDb.Data
                     UserId = 1,
                     Name = "Product 1",
                     Description = "Description 1",
-                    Price = 1000
+                    Price = 1000,
+                    DateTime = "2021-01-01 00:00:00"
                 });
         }
 }

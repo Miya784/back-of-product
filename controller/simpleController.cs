@@ -27,13 +27,13 @@ namespace simpleWebApp.controller
             new DeviceDataSchedul { id = 3, client_id = 3, name = "test3", status = false, scheduler_active = true, started = System.DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") }
         };
 
-            var onlineSchedul = new OnlineSchedul
+            var OnlineSchedul = new OnlineSchedul
             {
                 data = data.Where(d => d.status == true).ToArray(),
                 count = data.Count(d => d.status == true)
             };
 
-            var offlineSchedul = new OfflineSchedul
+            var OfflineSchedul = new OfflineSchedul
             {
                 data = data.Where(d => d.status == false).ToArray(),
                 count = data.Count(d => d.status == false)
@@ -47,8 +47,8 @@ namespace simpleWebApp.controller
 
             var response = new
             {
-                online = onlineSchedul,
-                offline = offlineSchedul,
+                onlineSchedul = OnlineSchedul,
+                offlineSchedul = OfflineSchedul,
                 completed = activeSchedul
             };
 

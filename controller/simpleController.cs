@@ -5,9 +5,11 @@ namespace simpleWebApp.controller
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Test")]
     public class simpleController : Controller
     {
         [HttpGet]
+        [Route("hello")]
         public string Get()
         {
             return "Hello World!";
@@ -16,8 +18,11 @@ namespace simpleWebApp.controller
 
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Test")]
     public class TestApiController : ControllerBase
     {
+        [HttpGet]
+        [Route("test")]
         public IActionResult Get()
         {
             var data = new[]

@@ -1,5 +1,4 @@
 using PosgresDb.Data;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Admin.Models;
 
@@ -7,6 +6,7 @@ namespace registerAdmin.controller
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Admin")]
     public class RegisterAdminController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -17,6 +17,7 @@ namespace registerAdmin.controller
         }
 
         [HttpPost]
+        [Route("register")]
         public IActionResult Post([FromBody] RegisterAdminRequest request)
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password) || string.IsNullOrEmpty(request.Email))
@@ -54,6 +55,7 @@ namespace registerAdmin.controller
     }
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Admin")]
     public class ProductAdminController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -64,6 +66,7 @@ namespace registerAdmin.controller
         }
 
         [HttpPost]
+        [Route("create-product")]
         public IActionResult Post([FromBody] ProductAdmin request)
         {
             if (request.UserId == 0 || string.IsNullOrEmpty(request.Name) || string.IsNullOrEmpty(request.Description) || request.Price == 0)

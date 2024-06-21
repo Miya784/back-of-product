@@ -8,6 +8,7 @@ namespace registerAdmin.controller
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Customer")]
     public class RegisterCustomerController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -18,6 +19,7 @@ namespace registerAdmin.controller
         }
 
         [HttpPost]
+        [Route("register-customer")]
         public IActionResult Post([FromBody] RegisterAdminRequest request)
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password) || string.IsNullOrEmpty(request.Email))
@@ -55,6 +57,7 @@ namespace registerAdmin.controller
     }
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Customer")]
     public class CustomerbuyController : Controller
     {
         private readonly AppDbContext _context;
@@ -64,6 +67,7 @@ namespace registerAdmin.controller
         }
 
         [HttpPost]
+        [Route("buy")]
         public IActionResult Port([FromBody] BuyRequest request)
         {
             if (string.IsNullOrEmpty(request.ProductName) || request.UserId == 0 || request.Price == 0.0m)

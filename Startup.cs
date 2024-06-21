@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using PosgresDb.Data;
 
 public class Startup
@@ -28,6 +30,24 @@ public class Startup
         services.AddEntityFrameworkNpgsql()
             .AddDbContext<AppDbContext>(opt =>
             opt.UseNpgsql(Configuration.GetConnectionString("simpleConnection")));
+
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            c.TagActionsBy(api => {
+                if (api.GroupName != null)
+                {
+                    return new[] { api.GroupName };
+                }
+                var controllerActionDescriptor = api.ActionDescriptor as ControllerActionDescriptor;
+                if (controllerActionDescriptor != null)
+                {
+                    return new[] { controllerActionDescriptor.ControllerName };
+                }
+                throw new InvalidOperationException("Unable to determine tag for endpoint.");
+            });
+            c.DocInclusionPredicate((name, api) => true);
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -35,7 +55,9 @@ public class Startup
         if (env.IsDevelopment())
         {
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1");
+            });
         }
 
         app.UseHttpsRedirection();

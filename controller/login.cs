@@ -6,6 +6,7 @@ namespace login.controller
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Admin")]
     public class loginAdminController : Controller
     {
         private readonly AppDbContext _context;
@@ -15,6 +16,7 @@ namespace login.controller
         }
 
         [HttpPost]
+        [Route("loginAdmin")]
         public IActionResult Post([FromBody] LoginRequest request)
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password))
@@ -37,6 +39,7 @@ namespace login.controller
     }
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Customer")]
     public class loginUserController : Controller
     {
         private readonly AppDbContext _context;
@@ -48,6 +51,7 @@ namespace login.controller
         }
 
         [HttpPost]
+        [Route("login")]
         public IActionResult Post([FromBody] LoginRequest request)
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password))

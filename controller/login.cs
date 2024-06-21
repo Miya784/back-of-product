@@ -1,15 +1,6 @@
 using login.Models;
-using Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using PosgresDb.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using customer.Models;
-using System.Text;
-using System.IdentityModel.Tokens.Jwt;
-
-
-
 
 namespace login.controller
 {

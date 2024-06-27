@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Admin.Models;
 using customer.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace registerAdmin.controller
 {
@@ -19,7 +20,6 @@ namespace registerAdmin.controller
         }
 
         [HttpPost]
-        [Route("register-customer")]
         public IActionResult Post([FromBody] RegisterAdminRequest request)
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password) || string.IsNullOrEmpty(request.Email))
@@ -55,6 +55,7 @@ namespace registerAdmin.controller
             }
         }
     }
+    [Authorize(Roles = "Customer")]
     [ApiController]
     [Route("api/[controller]")]
     [ApiExplorerSettings(GroupName = "Customer")]
@@ -67,7 +68,6 @@ namespace registerAdmin.controller
         }
 
         [HttpPost]
-        [Route("buy")]
         public IActionResult Port([FromBody] BuyRequest request)
         {
             if (string.IsNullOrEmpty(request.ProductName) || request.UserId == 0 || request.Price == 0.0m)

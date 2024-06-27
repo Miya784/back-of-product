@@ -17,7 +17,6 @@ namespace registerAdmin.controller
         }
 
         [HttpPost]
-        [Route("register")]
         public IActionResult Post([FromBody] RegisterAdminRequest request)
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password) || string.IsNullOrEmpty(request.Email))
@@ -66,7 +65,6 @@ namespace registerAdmin.controller
         }
 
         [HttpPost]
-        [Route("create-product")]
         public IActionResult Post([FromBody] RequestProductAdmin request)
         {
             if (request.UserId == 0 || string.IsNullOrEmpty(request.Name) || string.IsNullOrEmpty(request.Description) || request.Price == 0)
